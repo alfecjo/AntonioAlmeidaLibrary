@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Stephen King",
+    "email": "stephen.king@example.com",
+    "nationality": "American",
+    "books": [
+      {
+        "isbn": "978-1501142970",
+        "title": "It",
+        "price": 19.99,
+        "available": true,
+        "genre": "Horror",
+        "series": true
+      }
+    ]
+  }
+]

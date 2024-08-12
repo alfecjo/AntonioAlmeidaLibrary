@@ -1,0 +1,8 @@
+{
+  "isbn": "978-0451526342",
+  "title": "Animal Farm",
+  "price": 12.99,
+  "available": true,
+  "genre": "Political Satire",
+  "series": false
+}

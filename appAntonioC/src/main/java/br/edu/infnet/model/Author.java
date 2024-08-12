@@ -1,5 +1,7 @@
 package br.edu.infnet.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +9,8 @@ public class Author {
     private String name;
     private String email;
     private String nationality;
-    
+
+    @JsonManagedReference
     private List<Book> books;
 
     public Author(String name, String email, String nationality) {
@@ -17,7 +20,7 @@ public class Author {
         this.books = new ArrayList<>();
     }
 
-    // getters e setters
+    // Getters e setters
 
     public String getName() {
         return name;

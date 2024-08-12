@@ -1,0 +1,126 @@
+GET http://localhost:8080/nonfictionbooks/978-0316010665
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-08-11T212230.200.json
+
+###
+
+GET http://localhost:8080/nonfictionbooks
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-08-11T212206.200.json
+
+###
+
+GET http://localhost:8080/fictionbooks
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-08-11T212026.200.json
+
+###
+
+GET http://localhost:8080/books/978-0316010665
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-08-11T211910.200.json
+
+###
+
+GET http://localhost:8080/authors/stephenKing
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-08-11T211813.200.json
+
+###
+
+GET http://localhost:8080/books/978-0451526342
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-08-11T210646.200.json
+
+###
+
+GET http://localhost:8080/authors/stephenKing
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-08-11T194554.200.json
+
+###
+
+GET http://localhost:8080/authors/stephenKing
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-08-11T194533.200.json
+
+###
+
+GET http://localhost:8080/authors/stephenKing
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-08-11T192345.200.json
+
+###
+
+GET http://localhost:8080/authors/stephenKing
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-08-11T192152.200.json
+
+###
+
+GET http://localhost:8080/authors/stephenKing
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-08-11T191954.404.json
+
+###
+
+GET http://localhost:8080/authors/stephenKing
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-08-11T191949.404.json
+
+###
+
+GET http://127.0.0.1:8080/authors/stephenKing
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-08-11T191835.404.json
+
+###
+
+GET http://localhost:8080/authors/stephenKing
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-08-11T191346.404.json
+
+###
+

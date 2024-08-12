@@ -1,0 +1,26 @@
+[
+  {
+    "isbn": "978-0099590088",
+    "title": "Sapiens: A Brief History of Humankind",
+    "price": 25.99,
+    "available": true,
+    "subject": "History",
+    "references": 10
+  },
+  {
+    "isbn": "978-0316010665",
+    "title": "Blink: The Power of Thinking Without Thinking",
+    "price": 21.99,
+    "available": true,
+    "subject": "Psychology",
+    "references": 5
+  },
+  {
+    "isbn": "978-0375405820",
+    "title": "Discipline and Punish",
+    "price": 29.99,
+    "available": true,
+    "subject": "Philosophy",
+    "references": 12
+  }
+]

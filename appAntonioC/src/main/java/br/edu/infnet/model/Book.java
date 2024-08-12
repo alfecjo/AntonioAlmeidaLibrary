@@ -1,11 +1,17 @@
 package br.edu.infnet.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 public class Book {
+    //id
+   private String isbn;
     private String title;
-    private String isbn;
+
+
     private float price;
     private boolean available;
-    
+
+    @JsonBackReference
     private Author author;
 
     public Book(String title, String isbn, float price, boolean available, Author author) {
@@ -17,7 +23,7 @@ public class Book {
         this.author.addBook(this);  // Adiciona o livro à lista de livros do autor
     }
 
-    // getters e setters
+    // Getters e setters
 
     public String getTitle() {
         return title;

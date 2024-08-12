@@ -1,0 +1,42 @@
+[
+  {
+    "isbn": "978-0747532699",
+    "title": "Harry Potter and the Sorcerer's Stone",
+    "price": 39.99,
+    "available": true,
+    "genre": "Fantasy",
+    "series": true
+  },
+  {
+    "isbn": "978-0451526342",
+    "title": "Animal Farm",
+    "price": 12.99,
+    "available": true,
+    "genre": "Political Satire",
+    "series": false
+  },
+  {
+    "isbn": "978-0062693662",
+    "title": "Murder on the Orient Express",
+    "price": 15.99,
+    "available": true,
+    "genre": "Mystery",
+    "series": false
+  },
+  {
+    "isbn": "978-1501142970",
+    "title": "It",
+    "price": 19.99,
+    "available": true,
+    "genre": "Horror",
+    "series": true
+  },
+  {
+    "isbn": "978-0062572235",
+    "title": "American Gods",
+    "price": 18.99,
+    "available": true,
+    "genre": "Fantasy",
+    "series": true
+  }
+]

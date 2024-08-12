@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Ignorar o arquivo Apresentação1.pptx
+Apresentação1.pptx
+gitProjeto.txt
