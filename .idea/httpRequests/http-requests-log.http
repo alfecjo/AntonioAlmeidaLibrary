@@ -1,3 +1,76 @@
+GET http://localhost:8080/authors/stephenKing
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-08-20T074512.200.json
+
+###
+
+GET http://localhost:8080/authors/stephenKing
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-08-20T074501.200.json
+
+###
+
+GET http://localhost:8080/authors/stephenKing
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-08-20T074451.200.json
+
+###
+
+POST http://localhost:8080/books
+Content-Length: 0
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-08-19T114307.400.json
+
+###
+
+GET http://localhost:8080/authors
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-08-19T105438.200.json
+
+###
+
+GET http://localhost:8080/nonfictionbooks/978-0316010665
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-08-19T100917.404.json
+
+###
+
+GET http://localhost:8080/nonfictionbooks/978-0316010665
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-08-19T094528.404.json
+
+###
+
+GET http://localhost:8080/authors
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-08-19T094446.200.json
+
+###
+
 GET http://localhost:8080/nonfictionbooks/978-0316010665
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)

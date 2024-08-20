@@ -1,6 +1,10 @@
-package br.edu.infnet.model;
+package br.edu.infnet.appAntonioC.model;
 
+import jakarta.persistence.Entity;
+
+@Entity
 public class FictionBook extends Book {
+
     private String genre;
     private boolean isSeries;
 
@@ -9,6 +13,9 @@ public class FictionBook extends Book {
         super(title, isbn, price, available, author);
         this.genre = genre;
         this.isSeries = isSeries;
+    }
+
+    public FictionBook() {
     }
 
     // Getters e setters
@@ -30,6 +37,23 @@ public class FictionBook extends Book {
 
     @Override
     public String toString() {
-        return String.format("FictionBook{%s, genre='%s', isSeries=%b}", super.toString(), genre, isSeries);
+        return String.format(
+            "{\n" +
+            "  \"title\": \"%s\",\n" +
+            "  \"isbn\": \"%s\",\n" +
+            "  \"price\": %.2f,\n" +
+            "  \"available\": %b,\n" +
+            "  \"author\": \"%s\",\n" +
+            "  \"genre\": \"%s\",\n" +
+            "  \"isSeries\": %b\n" +
+            "}",
+            getTitle(),
+            getIsbn(),
+            getPrice(),
+            isAvailable(),
+            getAuthor().getName(),
+            genre,
+            isSeries
+        );
     }
 }

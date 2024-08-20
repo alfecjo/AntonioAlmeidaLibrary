@@ -1,27 +1,39 @@
-package br.edu.infnet.model;
+package br.edu.infnet.appAntonioC.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
+@Entity
 public class Book {
-    //id
-   private String isbn;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String isbn;
     private String title;
-
-
     private float price;
     private boolean available;
 
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference
     private Author author;
+
+    // Construtores, getters e setters
 
     public Book(String title, String isbn, float price, boolean available, Author author) {
         this.title = title;
         this.isbn = isbn;
         this.price = price;
         this.available = available;
-        this.author = author;
-        this.author.addBook(this);  // Adiciona o livro à lista de livros do autor
+        setAuthor(author); // Garante que o autor seja setado e o livro adicionado à lista de livros do autor
     }
+
+    public Book() {}
 
     // Getters e setters
 
@@ -69,13 +81,20 @@ public class Book {
     }
 
     @Override
-    public String toString() {
-        return "Book{" +
-                "title='" + title + '\'' +
-                ", isbn='" + isbn + '\'' +
-                ", price=" + price +
-                ", available=" + available +
-                ", author=" + author.getName() +  // Mostra apenas o nome do autor
-                '}';
-    }
+public String toString() {
+    return String.format(
+        "{\n" +
+        "  \"title\": \"%s\",\n" +
+        "  \"isbn\": \"%s\",\n" +
+        "  \"price\": %.2f,\n" +
+        "  \"available\": %b,\n" +
+        "  \"author\": \"%s\"\n" +
+        "}",
+        title,
+        isbn,
+        price,
+        available, author != null ? author.getName() : "N/A" // Mostra apenas o nome do autor
+    );
+}
+
 }
