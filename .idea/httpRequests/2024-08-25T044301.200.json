@@ -1,0 +1,16 @@
+{
+  "id": 1,
+  "name": "J.K. Rowling",
+  "email": "jk.rowling@example.com",
+  "nationality": "British",
+  "books": [
+    {
+      "isbn": "978-0747532699",
+      "title": "Harry Potter and the Sorcerer's Stone",
+      "price": 39.99,
+      "available": true,
+      "genre": "Fantasy",
+      "series": true
+    }
+  ]
+}

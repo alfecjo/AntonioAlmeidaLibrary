@@ -1,0 +1,1437 @@
+Index: appAntonioC/src/main/java/br/edu/infnet/controller/FictionBookController.java
+===================================================================
+diff --git a/appAntonioC/src/main/java/br/edu/infnet/controller/FictionBookController.java b/appAntonioC/src/main/java/br/edu/infnet/controller/FictionBookController.java
+deleted file mode 100644
+--- a/appAntonioC/src/main/java/br/edu/infnet/controller/FictionBookController.java	(revision fe7a3ba77b7ddac1b5f868a235af9fe529d40bfc)
++++ /dev/null	(revision fe7a3ba77b7ddac1b5f868a235af9fe529d40bfc)
+@@ -1,61 +0,0 @@
+-package br.edu.infnet.controller;
+-
+-import br.edu.infnet.model.FictionBook;
+-import br.edu.infnet.service.LibraryService;
+-import org.springframework.beans.factory.annotation.Autowired;
+-import org.springframework.web.bind.annotation.*;
+-
+-import java.util.List;
+-// import java.util.Optional;
+-
+-@RestController
+-@RequestMapping("/fictionbooks")
+-public class FictionBookController {
+-
+-    @Autowired
+-    private LibraryService libraryService;
+-
+-    @GetMapping
+-    public List<FictionBook> getAllFictionBooks() {
+-        return libraryService.getBooks().stream()
+-                .filter(book -> book instanceof FictionBook)
+-                .map(book -> (FictionBook) book)
+-                .toList();
+-    }
+-
+-//    @GetMapping("/{isbn}")
+-//    public FictionBook getFictionBookByIsbn(@PathVariable String isbn) {
+-//        return (FictionBook) libraryService.getBooks().stream()
+-//                .filter(book -> book instanceof FictionBook && book.getIsbn().equals(isbn))
+-//                .findFirst()
+-//                .orElse(null);
+-//    }
+-
+-//    @PostMapping
+-//    public void addFictionBook(@RequestBody FictionBook fictionBook) {
+-//        libraryService.addBook(fictionBook);
+-//    }
+-
+-//    @PutMapping("/{isbn}")
+-//    public void updateFictionBook(@PathVariable String isbn, @RequestBody FictionBook updatedFictionBook) {
+-//        Optional<FictionBook> existingBook = libraryService.getBooks().stream()
+-//                .filter(book -> book instanceof FictionBook && book.getIsbn().equals(isbn))
+-//                .map(book -> (FictionBook) book)
+-//                .findFirst();
+-//
+-//        if (existingBook.isPresent()) {
+-//            FictionBook book = existingBook.get();
+-//            book.setTitle(updatedFictionBook.getTitle());
+-//            book.setPrice(updatedFictionBook.getPrice());
+-//            book.setAvailable(updatedFictionBook.isAvailable());
+-//            book.setGenre(updatedFictionBook.getGenre());
+-//            book.setSeries(updatedFictionBook.isSeries());
+-//            // Update other fields as needed
+-//        }
+-//    }
+-
+-//    @DeleteMapping("/{isbn}")
+-//    public void deleteFictionBook(@PathVariable String isbn) {
+-//        libraryService.getBooks().removeIf(book -> book instanceof FictionBook && book.getIsbn().equals(isbn));
+-//    }
+-}
+Index: appAntonioC/src/main/java/br/edu/infnet/controller/NonFictionBookController.java
+===================================================================
+diff --git a/appAntonioC/src/main/java/br/edu/infnet/controller/NonFictionBookController.java b/appAntonioC/src/main/java/br/edu/infnet/controller/NonFictionBookController.java
+deleted file mode 100644
+--- a/appAntonioC/src/main/java/br/edu/infnet/controller/NonFictionBookController.java	(revision fe7a3ba77b7ddac1b5f868a235af9fe529d40bfc)
++++ /dev/null	(revision fe7a3ba77b7ddac1b5f868a235af9fe529d40bfc)
+@@ -1,61 +0,0 @@
+-package br.edu.infnet.controller;
+-
+-import br.edu.infnet.model.NonFictionBook;
+-import br.edu.infnet.service.LibraryService;
+-import org.springframework.beans.factory.annotation.Autowired;
+-import org.springframework.web.bind.annotation.*;
+-
+-import java.util.List;
+-// import java.util.Optional;
+-
+-@RestController
+-@RequestMapping("/nonfictionbooks")
+-public class NonFictionBookController {
+-
+-    @Autowired
+-    private LibraryService libraryService;
+-
+-    @GetMapping
+-    public List<NonFictionBook> getAllNonFictionBooks() {
+-        return libraryService.getBooks().stream()
+-                .filter(book -> book instanceof NonFictionBook)
+-                .map(book -> (NonFictionBook) book)
+-                .toList();
+-    }
+-
+-    @GetMapping("/{isbn}")
+-    public NonFictionBook getNonFictionBookByIsbn(@PathVariable String isbn) {
+-        return (NonFictionBook) libraryService.getBooks().stream()
+-                .filter(book -> book instanceof NonFictionBook && book.getIsbn().equals(isbn))
+-                .findFirst()
+-                .orElse(null);
+-    }
+-
+-//    @PostMapping
+-//    public void addNonFictionBook(@RequestBody NonFictionBook nonFictionBook) {
+-//        libraryService.addBook(nonFictionBook);
+-//    }
+-
+-//    @PutMapping("/{isbn}")
+-//    public void updateNonFictionBook(@PathVariable String isbn, @RequestBody NonFictionBook updatedNonFictionBook) {
+-//        Optional<NonFictionBook> existingBook = libraryService.getBooks().stream()
+-//                .filter(book -> book instanceof NonFictionBook && book.getIsbn().equals(isbn))
+-//                .map(book -> (NonFictionBook) book)
+-//                .findFirst();
+-//
+-//        if (existingBook.isPresent()) {
+-//            NonFictionBook book = existingBook.get();
+-//            book.setTitle(updatedNonFictionBook.getTitle());
+-//            book.setPrice(updatedNonFictionBook.getPrice());
+-//            book.setAvailable(updatedNonFictionBook.isAvailable());
+-//            book.setSubject(updatedNonFictionBook.getSubject());
+-//            book.setReferences(updatedNonFictionBook.getReferences());
+-//            // Update other fields as needed
+-//        }
+-//    }
+-
+-//    @DeleteMapping("/{isbn}")
+-//    public void deleteNonFictionBook(@PathVariable String isbn) {
+-//        libraryService.getBooks().removeIf(book -> book instanceof NonFictionBook && book.getIsbn().equals(isbn));
+-//    }
+-}
+Index: appAntonioC/src/main/java/br/edu/infnet/service/LibraryService.java
+===================================================================
+diff --git a/appAntonioC/src/main/java/br/edu/infnet/service/LibraryService.java b/appAntonioC/src/main/java/br/edu/infnet/service/LibraryService.java
+deleted file mode 100644
+--- a/appAntonioC/src/main/java/br/edu/infnet/service/LibraryService.java	(revision fe7a3ba77b7ddac1b5f868a235af9fe529d40bfc)
++++ /dev/null	(revision fe7a3ba77b7ddac1b5f868a235af9fe529d40bfc)
+@@ -1,67 +0,0 @@
+-package br.edu.infnet.service;
+-
+-import br.edu.infnet.model.Author;
+-import br.edu.infnet.model.Book;
+-import br.edu.infnet.model.FictionBook;
+-import br.edu.infnet.model.NonFictionBook;
+-import org.springframework.stereotype.Service;
+-
+-import java.util.ArrayList;
+-import java.util.List;
+-
+-@Service
+-public class LibraryService {
+-
+-    private List<Author> authors = new ArrayList<>();
+-    private List<Book> books = new ArrayList<>();
+-
+-    public LibraryService() {
+-        // Criação de autores
+-        Author jkRowling = new Author("J.K. Rowling", "jk.rowling@example.com", "British");
+-        Author yuvalHarari = new Author("Yuval Noah Harari", "harari@example.com", "Israeli");
+-        Author georgeOrwell = new Author("George Orwell", "george.orwell@example.com", "British");
+-        Author malcolmGladwell = new Author("Malcolm Gladwell", "malcolm.gladwell@example.com", "Canadian");
+-        Author agathaChristie = new Author("Agatha Christie", "agatha.christie@example.com", "British");
+-        Author stephenKing = new Author("Stephen King", "stephen.king@example.com", "American");
+-        Author michelFoucault = new Author("Michel Foucault", "michel.foucault@example.com", "French");
+-        Author neilGaiman = new Author("Neil Gaiman", "neil.gaiman@example.com", "British");
+-
+-        // Adicionando autores à lista
+-        authors.add(jkRowling);
+-        authors.add(yuvalHarari);
+-        authors.add(georgeOrwell);
+-        authors.add(malcolmGladwell);
+-        authors.add(agathaChristie);
+-        authors.add(stephenKing);
+-        authors.add(michelFoucault);
+-        authors.add(neilGaiman);
+-
+-        // Criação de livros e associação aos autores
+-        FictionBook harryPotter = new FictionBook("Harry Potter and the Sorcerer's Stone", "978-0747532699", 39.99f, true, "Fantasy", true, jkRowling);
+-        FictionBook animalFarm = new FictionBook("Animal Farm", "978-0451526342", 12.99f, true, "Political Satire", false, georgeOrwell);
+-        NonFictionBook sapiens = new NonFictionBook("Sapiens: A Brief History of Humankind", "978-0099590088", 25.99f, true, "History", 10, yuvalHarari);
+-        NonFictionBook blink = new NonFictionBook("Blink: The Power of Thinking Without Thinking", "978-0316010665", 21.99f, true, "Psychology", 5, malcolmGladwell);
+-        FictionBook murderOnTheOrientExpress = new FictionBook("Murder on the Orient Express", "978-0062693662", 15.99f, true, "Mystery", false, agathaChristie);
+-        FictionBook it = new FictionBook("It", "978-1501142970", 19.99f, true, "Horror", true, stephenKing);
+-        NonFictionBook disciplineAndPunish = new NonFictionBook("Discipline and Punish", "978-0375405820", 29.99f, true, "Philosophy", 12, michelFoucault);
+-        FictionBook americanGods = new FictionBook("American Gods", "978-0062572235", 18.99f, true, "Fantasy", true, neilGaiman);
+-
+-        // Adicionando livros à lista
+-        books.add(harryPotter);
+-        books.add(animalFarm);
+-        books.add(sapiens);
+-        books.add(blink);
+-        books.add(murderOnTheOrientExpress);
+-        books.add(it);
+-        books.add(disciplineAndPunish);
+-        books.add(americanGods);
+-    }
+-
+-    public List<Author> getAuthors() {
+-        return authors;
+-    }
+-
+-    public List<Book> getBooks() {
+-        return books;
+-    }
+-}
+Index: appAntonioC/src/main/java/br/edu/infnet/appAntonioC/AppAntonioCApplication.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package br.edu.infnet.appAntonioC;\r\n\r\nimport br.edu.infnet.service.LibraryService;\r\nimport br.edu.infnet.controller.AuthorController;\r\nimport org.springframework.boot.CommandLineRunner;\r\nimport org.springframework.boot.SpringApplication;\r\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\r\nimport org.springframework.context.annotation.Bean;\r\nimport org.springframework.context.annotation.ComponentScan;\r\n\r\n@SpringBootApplication\r\n@ComponentScan(basePackages = {\"br.edu.infnet.service\", \"br.edu.infnet.controller\", \"br.edu.infnet.appAntonioC\"})\r\npublic class AppAntonioCApplication {\r\n\r\n    public static void main(String[] args) {\r\n        SpringApplication.run(AppAntonioCApplication.class, args);\r\n    }\r\n\r\n    @Bean\r\n    public CommandLineRunner run(LibraryService libraryService) {\r\n        return args -> {\r\n            System.out.println(\"\\navailable authors:\");\r\n            libraryService.getAuthors().forEach(author -> {\r\n                System.out.println(author);\r\n                author.getBooks().forEach(book -> System.out.println(\"  - \" + book));\r\n            });\r\n\r\n            System.out.println(\"\\navailable books:\");\r\n            libraryService.getBooks().forEach(System.out::println);\r\n        };\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/appAntonioC/src/main/java/br/edu/infnet/appAntonioC/AppAntonioCApplication.java b/appAntonioC/src/main/java/br/edu/infnet/appAntonioC/AppAntonioCApplication.java
+--- a/appAntonioC/src/main/java/br/edu/infnet/appAntonioC/AppAntonioCApplication.java	(revision fe7a3ba77b7ddac1b5f868a235af9fe529d40bfc)
++++ b/appAntonioC/src/main/java/br/edu/infnet/appAntonioC/AppAntonioCApplication.java	(date 1724618248151)
+@@ -1,32 +1,11 @@
+ package br.edu.infnet.appAntonioC;
+ 
+-import br.edu.infnet.service.LibraryService;
+-import br.edu.infnet.controller.AuthorController;
+-import org.springframework.boot.CommandLineRunner;
+ import org.springframework.boot.SpringApplication;
+ import org.springframework.boot.autoconfigure.SpringBootApplication;
+-import org.springframework.context.annotation.Bean;
+-import org.springframework.context.annotation.ComponentScan;
+ 
+ @SpringBootApplication
+-@ComponentScan(basePackages = {"br.edu.infnet.service", "br.edu.infnet.controller", "br.edu.infnet.appAntonioC"})
+ public class AppAntonioCApplication {
+-
+     public static void main(String[] args) {
+         SpringApplication.run(AppAntonioCApplication.class, args);
+     }
+-
+-    @Bean
+-    public CommandLineRunner run(LibraryService libraryService) {
+-        return args -> {
+-            System.out.println("\navailable authors:");
+-            libraryService.getAuthors().forEach(author -> {
+-                System.out.println(author);
+-                author.getBooks().forEach(book -> System.out.println("  - " + book));
+-            });
+-
+-            System.out.println("\navailable books:");
+-            libraryService.getBooks().forEach(System.out::println);
+-        };
+-    }
+ }
+Index: appAntonioC/src/main/resources/application.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>spring.application.name=appAntonioC\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>ISO-8859-1
+===================================================================
+diff --git a/appAntonioC/src/main/resources/application.properties b/appAntonioC/src/main/resources/application.properties
+--- a/appAntonioC/src/main/resources/application.properties	(revision fe7a3ba77b7ddac1b5f868a235af9fe529d40bfc)
++++ b/appAntonioC/src/main/resources/application.properties	(date 1724545316451)
+@@ -1,1 +1,18 @@
+ spring.application.name=appAntonioC
++
++spring.datasource.url=jdbc:postgresql://localhost:5432/appantonioc
++spring.datasource.username=postgres
++spring.datasource.password=acfa
++
++#spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
++
++spring.jpa.open-in-view=false
++
++spring.jpa.hibernate.ddl-auto=update
++
++spring.jpa.show-sql=true
++
++# Flyway settings
++spring.flyway.enabled=false
++spring.flyway.baseline-on-migrate=true
++spring.flyway.locations=classpath:db/migration
+\ No newline at end of file
+Index: appAntonioC/src/main/java/br/edu/infnet/model/FictionBook.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/appAntonioC/src/main/java/br/edu/infnet/model/FictionBook.java b/appAntonioC/src/main/java/br/edu/infnet/appAntonioC/model/FictionBook.java
+rename from appAntonioC/src/main/java/br/edu/infnet/model/FictionBook.java
+rename to appAntonioC/src/main/java/br/edu/infnet/appAntonioC/model/FictionBook.java
+--- a/appAntonioC/src/main/java/br/edu/infnet/model/FictionBook.java	(revision fe7a3ba77b7ddac1b5f868a235af9fe529d40bfc)
++++ b/appAntonioC/src/main/java/br/edu/infnet/appAntonioC/model/FictionBook.java	(date 1724612241382)
+@@ -1,10 +1,17 @@
+-package br.edu.infnet.model;
++package br.edu.infnet.appAntonioC.model;
+ 
++import jakarta.persistence.DiscriminatorValue;
++import jakarta.persistence.Entity;
++
++@Entity
++@DiscriminatorValue("Fiction")
+ public class FictionBook extends Book {
++
+     private String genre;
+-    private boolean isSeries;
++    private Boolean isSeries;
+ 
+-    // Construtor
++    public FictionBook() {}
++
+     public FictionBook(String title, String isbn, float price, boolean available, String genre, boolean isSeries, Author author) {
+         super(title, isbn, price, available, author);
+         this.genre = genre;
+Index: .idea/sqldialects.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/sqldialects.xml b/.idea/sqldialects.xml
+new file mode 100644
+--- /dev/null	(date 1724558415862)
++++ b/.idea/sqldialects.xml	(date 1724558415862)
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="SqlDialectMappings">
++    <file url="file://$PROJECT_DIR$/appAntonioC/src/main/java/br/edu/infnet/appAntonioC/repository/AuthorRepository.java" dialect="PostgreSQL" />
++    <file url="file://$PROJECT_DIR$/appAntonioC/src/main/java/br/edu/infnet/appAntonioC/repository/BookRepository.java" dialect="PostgreSQL" />
++    <file url="file://$PROJECT_DIR$/appAntonioC/src/main/resources/db/migrations/V1__create_author_table.sql" dialect="PostgreSQL" />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/jpa-buddy.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"JpaBuddyIdeaProjectConfig\">\r\n    <option name=\"renamerInitialized\" value=\"true\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/jpa-buddy.xml b/.idea/jpa-buddy.xml
+--- a/.idea/jpa-buddy.xml	(revision fe7a3ba77b7ddac1b5f868a235af9fe529d40bfc)
++++ b/.idea/jpa-buddy.xml	(date 1724510949038)
+@@ -1,6 +1,7 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="JpaBuddyIdeaProjectConfig">
++    <option name="defaultUnitInitialized" value="true" />
+     <option name="renamerInitialized" value="true" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: appAntonioC/src/main/java/br/edu/infnet/model/NonFictionBook.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/appAntonioC/src/main/java/br/edu/infnet/model/NonFictionBook.java b/appAntonioC/src/main/java/br/edu/infnet/appAntonioC/model/NonFictionBook.java
+rename from appAntonioC/src/main/java/br/edu/infnet/model/NonFictionBook.java
+rename to appAntonioC/src/main/java/br/edu/infnet/appAntonioC/model/NonFictionBook.java
+--- a/appAntonioC/src/main/java/br/edu/infnet/model/NonFictionBook.java	(revision fe7a3ba77b7ddac1b5f868a235af9fe529d40bfc)
++++ b/appAntonioC/src/main/java/br/edu/infnet/appAntonioC/model/NonFictionBook.java	(date 1724610468677)
+@@ -1,14 +1,21 @@
+-package br.edu.infnet.model;
++package br.edu.infnet.appAntonioC.model;
+ 
++import jakarta.persistence.DiscriminatorValue;
++import jakarta.persistence.Entity;
++
++@Entity
++@DiscriminatorValue("NonFiction")
+ public class NonFictionBook extends Book {
++
+     private String subject;
+-    private int references;
++    private int referenceNumber;
+ 
+-    // Construtor
+-    public NonFictionBook(String title, String isbn, float price, boolean available, String subject, int references, Author author) {
++    public NonFictionBook() {}
++
++    public NonFictionBook(String title, String isbn, float price, boolean available, String subject, int referenceNumber, Author author) {
+         super(title, isbn, price, available, author);
+         this.subject = subject;
+-        this.references = references;
++        this.referenceNumber = referenceNumber;
+     }
+ 
+     // Getters e setters
+@@ -20,16 +27,16 @@
+         this.subject = subject;
+     }
+ 
+-    public int getReferences() {
+-        return references;
++    public int getReferenceNumber() {
++        return referenceNumber; // Alterado de 'reference' para 'referenceNumber'
+     }
+ 
+-    public void setReferences(int references) {
+-        this.references = references;
++    public void setReferenceNumber(int referenceNumber) { // Alterado de 'reference' para 'referenceNumber'
++        this.referenceNumber = referenceNumber;
+     }
+ 
+     @Override
+     public String toString() {
+-        return String.format("NonFictionBook{%s, subject='%s', references=%d}", super.toString(), subject, references);
++        return String.format("NonFictionBook{%s, subject='%s', referenceNumber=%d}", super.toString(), subject, referenceNumber); // Alterado de 'reference' para 'referenceNumber'
+     }
+ }
+Index: appAntonioC/pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\r\n    <modelVersion>4.0.0</modelVersion>\r\n\r\n    <parent>\r\n        <groupId>org.springframework.boot</groupId>\r\n        <artifactId>spring-boot-starter-parent</artifactId>\r\n        <version>3.3.2</version>\r\n        <relativePath/> <!-- lookup parent from repository -->\r\n    </parent>\r\n\r\n    <groupId>br.edu.infnet</groupId>\r\n    <artifactId>appAntonioC</artifactId>\r\n    <version>0.0.1-SNAPSHOT</version>\r\n    <name>appAntonioC</name>\r\n    <description>Sistema de gerenciamento de biblioteca. O projeto é voltado para um contexto diferente do que você está apresentando, focando no gerenciamento de livros e autores.</description>\r\n\r\n    <properties>\r\n        <java.version>17</java.version>\r\n        <spring-boot.version>3.3.2</spring-boot.version>\r\n        <maven.compiler.plugin.version>3.10.1</maven.compiler.plugin.version>\r\n    </properties>\r\n\r\n    <dependencies>\r\n        <!-- Spring Boot Starter para uma aplicação básica -->\r\n        <dependency>\r\n            <groupId>org.springframework.boot</groupId>\r\n            <artifactId>spring-boot-starter</artifactId>\r\n        </dependency>\r\n\r\n        <dependency>\r\n            <groupId>org.springframework.boot</groupId>\r\n            <artifactId>spring-boot-starter-web</artifactId>\r\n        </dependency>\r\n\r\n        <!-- Dependência para desenvolvimento e teste de aplicações Spring Boot -->\r\n        <dependency>\r\n            <groupId>org.springframework.boot</groupId>\r\n            <artifactId>spring-boot-starter-test</artifactId>\r\n            <scope>test</scope>\r\n        </dependency>\r\n    </dependencies>\r\n\r\n    <build>\r\n        <plugins>\r\n            <!-- Plugin do Maven para usar Spring Boot -->\r\n            <plugin>\r\n                <groupId>org.springframework.boot</groupId>\r\n                <artifactId>spring-boot-maven-plugin</artifactId>\r\n            </plugin>\r\n            <!-- Plugin do Maven Compiler para compilar o código fonte -->\r\n            <plugin>\r\n                <groupId>org.apache.maven.plugins</groupId>\r\n                <artifactId>maven-compiler-plugin</artifactId>\r\n                <version>${maven.compiler.plugin.version}</version>\r\n                <configuration>\r\n                    <source>${java.version}</source>\r\n                    <target>${java.version}</target>\r\n                </configuration>\r\n            </plugin>\r\n        </plugins>\r\n    </build>\r\n\r\n    <repositories>\r\n        <repository>\r\n            <id>spring-releases</id>\r\n            <url>https://repo.spring.io/release</url>\r\n        </repository>\r\n        <repository>\r\n            <id>spring-snapshots</id>\r\n            <url>https://repo.spring.io/snapshot</url>\r\n            <snapshots>\r\n                <enabled>true</enabled>\r\n            </snapshots>\r\n        </repository>\r\n        <repository>\r\n            <id>maven-central</id>\r\n            <name>Maven Central</name>\r\n            <url>https://repo1.maven.org/maven2/</url>\r\n        </repository>\r\n    </repositories>\r\n</project>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/appAntonioC/pom.xml b/appAntonioC/pom.xml
+--- a/appAntonioC/pom.xml	(revision fe7a3ba77b7ddac1b5f868a235af9fe529d40bfc)
++++ b/appAntonioC/pom.xml	(date 1724619472529)
+@@ -1,5 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
++<project xmlns="http://maven.apache.org/POM/4.0.0"
++         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+     <modelVersion>4.0.0</modelVersion>
+ 
+@@ -7,14 +8,15 @@
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-parent</artifactId>
+         <version>3.3.2</version>
+-        <relativePath/> <!-- lookup parent from repository -->
++        <relativePath/>
+     </parent>
+ 
+     <groupId>br.edu.infnet</groupId>
+     <artifactId>appAntonioC</artifactId>
+     <version>0.0.1-SNAPSHOT</version>
+     <name>appAntonioC</name>
+-    <description>Sistema de gerenciamento de biblioteca. O projeto é voltado para um contexto diferente do que você está apresentando, focando no gerenciamento de livros e autores.</description>
++    <description>Sistema de gerenciamento de biblioteca. O projeto é voltado para um contexto diferente do que você
++        está apresentando, focando no gerenciamento de livros e autores.</description>
+ 
+     <properties>
+         <java.version>17</java.version>
+@@ -23,7 +25,6 @@
+     </properties>
+ 
+     <dependencies>
+-        <!-- Spring Boot Starter para uma aplicação básica -->
+         <dependency>
+             <groupId>org.springframework.boot</groupId>
+             <artifactId>spring-boot-starter</artifactId>
+@@ -34,7 +35,17 @@
+             <artifactId>spring-boot-starter-web</artifactId>
+         </dependency>
+ 
+-        <!-- Dependência para desenvolvimento e teste de aplicações Spring Boot -->
++        <dependency>
++            <groupId>org.springframework.boot</groupId>
++            <artifactId>spring-boot-starter-data-jpa</artifactId>
++        </dependency>
++
++        <dependency>
++            <groupId>org.postgresql</groupId>
++            <artifactId>postgresql</artifactId>
++            <version>42.6.2</version>
++        </dependency>
++
+         <dependency>
+             <groupId>org.springframework.boot</groupId>
+             <artifactId>spring-boot-starter-test</artifactId>
+@@ -44,12 +55,10 @@
+ 
+     <build>
+         <plugins>
+-            <!-- Plugin do Maven para usar Spring Boot -->
+             <plugin>
+                 <groupId>org.springframework.boot</groupId>
+                 <artifactId>spring-boot-maven-plugin</artifactId>
+             </plugin>
+-            <!-- Plugin do Maven Compiler para compilar o código fonte -->
+             <plugin>
+                 <groupId>org.apache.maven.plugins</groupId>
+                 <artifactId>maven-compiler-plugin</artifactId>
+Index: appAntonioC/src/main/java/br/edu/infnet/appAntonioC/service/AuthorService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/appAntonioC/src/main/java/br/edu/infnet/appAntonioC/service/AuthorService.java b/appAntonioC/src/main/java/br/edu/infnet/appAntonioC/service/AuthorService.java
+new file mode 100644
+--- /dev/null	(date 1724598881322)
++++ b/appAntonioC/src/main/java/br/edu/infnet/appAntonioC/service/AuthorService.java	(date 1724598881322)
+@@ -0,0 +1,50 @@
++package br.edu.infnet.appAntonioC.service;
++
++import br.edu.infnet.appAntonioC.model.Author;
++import br.edu.infnet.appAntonioC.repository.AuthorRepository;
++import br.edu.infnet.appAntonioC.repository.BookRepository;
++import org.springframework.beans.factory.annotation.Autowired;
++import org.springframework.stereotype.Service;
++import org.springframework.transaction.annotation.Transactional;
++
++import java.util.List;
++import java.util.Optional;
++
++@Service
++public class AuthorService {
++
++    private final AuthorRepository authorRepository;
++    private final BookRepository bookRepository;
++
++    @Autowired
++    public AuthorService(AuthorRepository authorRepository, BookRepository bookRepository) {
++        this.authorRepository = authorRepository;
++        this.bookRepository = bookRepository;
++    }
++
++    @Transactional(readOnly = true)
++    public List<Author> getAllAuthors() {
++        return authorRepository.findAll();
++    }
++
++    @Transactional(readOnly = true)
++    public Optional<Author> getAuthorById(Long id) {
++        return authorRepository.findById(id);
++    }
++
++    @Transactional
++    public void addAuthor(String name, String email, String nationality) {
++        authorRepository.insertAuthor(name, email, nationality);
++    }
++
++    @Transactional
++    public void updateAuthor(Long id, String name, String email, String nationality) {
++        authorRepository.updateAuthor(id, name, email, nationality);
++    }
++
++    @Transactional
++    public void deleteAuthor(Long id) {
++         bookRepository.deleteBooksByAuthorId(id);
++        authorRepository.deleteById(id);
++    }
++}
+Index: appAntonioC/src/main/java/br/edu/infnet/model/Author.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/appAntonioC/src/main/java/br/edu/infnet/model/Author.java b/appAntonioC/src/main/java/br/edu/infnet/appAntonioC/model/Author.java
+rename from appAntonioC/src/main/java/br/edu/infnet/model/Author.java
+rename to appAntonioC/src/main/java/br/edu/infnet/appAntonioC/model/Author.java
+--- a/appAntonioC/src/main/java/br/edu/infnet/model/Author.java	(revision fe7a3ba77b7ddac1b5f868a235af9fe529d40bfc)
++++ b/appAntonioC/src/main/java/br/edu/infnet/appAntonioC/model/Author.java	(date 1724611519146)
+@@ -1,26 +1,51 @@
+-package br.edu.infnet.model;
++package br.edu.infnet.appAntonioC.model;
+ 
+ import com.fasterxml.jackson.annotation.JsonManagedReference;
+-
++import jakarta.persistence.*;
+ import java.util.ArrayList;
+ import java.util.List;
+ 
++@Entity
+ public class Author {
++
++    @Id
++    @GeneratedValue(strategy = GenerationType.IDENTITY)
++    private Long id;
++
+     private String name;
+     private String email;
+     private String nationality;
+ 
++    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+     @JsonManagedReference
+-    private List<Book> books;
++    private List<Book> books = new ArrayList<>();
++
++    public Author() {}
+ 
+     public Author(String name, String email, String nationality) {
+         this.name = name;
+         this.email = email;
+         this.nationality = nationality;
+-        this.books = new ArrayList<>();
++    }
++
++    public void addBook(Book book) {
++        books.add(book);
++        book.setAuthor(this);
++    }
++
++    public void removeBook(Book book) {
++        books.remove(book);
++        book.setAuthor(null);
+     }
+ 
+     // Getters e setters
++    public Long getId() {
++        return id;
++    }
++
++    public void setId(Long id) {
++        this.id = id;
++    }
+ 
+     public String getName() {
+         return name;
+@@ -50,17 +75,7 @@
+         return books;
+     }
+ 
+-    public void addBook(Book book) {
+-        books.add(book);
+-    }
+-
+-    @Override
+-    public String toString() {
+-        return "Author{" +
+-                "name='" + name + '\'' +
+-                ", email='" + email + '\'' +
+-                ", nationality='" + nationality + '\'' +
+-                ", books=" + books +
+-                '}';
++    public void setBooks(List<Book> books) {
++        this.books = books;
+     }
+ }
+Index: .idea/dataSources.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/dataSources.xml b/.idea/dataSources.xml
+new file mode 100644
+--- /dev/null	(date 1724522457457)
++++ b/.idea/dataSources.xml	(date 1724522457457)
+@@ -0,0 +1,18 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
++    <data-source source="LOCAL" name="appantonioc@localhost" uuid="2fe6d516-3ef7-423e-89eb-f8ba5f658323">
++      <driver-ref>postgresql</driver-ref>
++      <synchronize>true</synchronize>
++      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
++      <jdbc-url>jdbc:postgresql://localhost:5432/appantonioc</jdbc-url>
++      <jdbc-additional-properties>
++        <property name="com.intellij.clouds.kubernetes.db.host.port" />
++        <property name="com.intellij.clouds.kubernetes.db.enabled" value="false" />
++        <property name="com.intellij.clouds.kubernetes.db.resource.type" value="Deployment" />
++        <property name="com.intellij.clouds.kubernetes.db.container.port" />
++      </jdbc-additional-properties>
++      <working-dir>$ProjectFileDir$</working-dir>
++    </data-source>
++  </component>
++</project>
+\ No newline at end of file
+Index: appAntonioC/src/main/java/br/edu/infnet/model/Book.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/appAntonioC/src/main/java/br/edu/infnet/model/Book.java b/appAntonioC/src/main/java/br/edu/infnet/appAntonioC/model/Book.java
+rename from appAntonioC/src/main/java/br/edu/infnet/model/Book.java
+rename to appAntonioC/src/main/java/br/edu/infnet/appAntonioC/model/Book.java
+--- a/appAntonioC/src/main/java/br/edu/infnet/model/Book.java	(revision fe7a3ba77b7ddac1b5f868a235af9fe529d40bfc)
++++ b/appAntonioC/src/main/java/br/edu/infnet/appAntonioC/model/Book.java	(date 1724609883576)
+@@ -1,30 +1,49 @@
+-package br.edu.infnet.model;
++package br.edu.infnet.appAntonioC.model;
+ 
+ import com.fasterxml.jackson.annotation.JsonBackReference;
++import jakarta.persistence.*;
++
++
++import com.fasterxml.jackson.annotation.JsonTypeInfo;
++import com.fasterxml.jackson.annotation.JsonSubTypes;
++
++@JsonTypeInfo(
++        use = JsonTypeInfo.Id.NAME,
++        property = "type")
++@JsonSubTypes({
++        @JsonSubTypes.Type(value = FictionBook.class, name = "Fiction"),
++        @JsonSubTypes.Type(value = NonFictionBook.class, name = "NonFiction")
++})
++@Entity
++@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
++@DiscriminatorColumn(name = "book_type", discriminatorType = DiscriminatorType.STRING)
++public abstract class Book {
+ 
+-public class Book {
+-    //id
+-   private String isbn;
++    @Id
++    @GeneratedValue(strategy = GenerationType.IDENTITY)
++    private Long id;
++
++    private String isbn;
+     private String title;
+-
+-
+     private float price;
+     private boolean available;
+ 
++    @ManyToOne(fetch = FetchType.EAGER)
++    @JoinColumn(name = "author_id", nullable = false)
+     @JsonBackReference
+     private Author author;
+ 
++    public Book() {}
++
+     public Book(String title, String isbn, float price, boolean available, Author author) {
+         this.title = title;
+         this.isbn = isbn;
+         this.price = price;
+         this.available = available;
+         this.author = author;
+-        this.author.addBook(this);  // Adiciona o livro à lista de livros do autor
+     }
+ 
+     // Getters e setters
+-
+     public String getTitle() {
+         return title;
+     }
+@@ -67,15 +86,4 @@
+             author.addBook(this);  // Garante que o livro está na lista do autor
+         }
+     }
+-
+-    @Override
+-    public String toString() {
+-        return "Book{" +
+-                "title='" + title + '\'' +
+-                ", isbn='" + isbn + '\'' +
+-                ", price=" + price +
+-                ", available=" + available +
+-                ", author=" + author.getName() +  // Mostra apenas o nome do autor
+-                '}';
+-    }
+ }
+Index: .idea/httpRequests/http-requests-log.http
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>GET http://localhost:8080/nonfictionbooks/978-0316010665\r\nConnection: Keep-Alive\r\nUser-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)\r\nAccept-Encoding: br,deflate,gzip,x-gzip\r\n\r\n<> 2024-08-11T212230.200.json\r\n\r\n###\r\n\r\nGET http://localhost:8080/nonfictionbooks\r\nConnection: Keep-Alive\r\nUser-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)\r\nAccept-Encoding: br,deflate,gzip,x-gzip\r\n\r\n<> 2024-08-11T212206.200.json\r\n\r\n###\r\n\r\nGET http://localhost:8080/fictionbooks\r\nConnection: Keep-Alive\r\nUser-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)\r\nAccept-Encoding: br,deflate,gzip,x-gzip\r\n\r\n<> 2024-08-11T212026.200.json\r\n\r\n###\r\n\r\nGET http://localhost:8080/books/978-0316010665\r\nConnection: Keep-Alive\r\nUser-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)\r\nAccept-Encoding: br,deflate,gzip,x-gzip\r\n\r\n<> 2024-08-11T211910.200.json\r\n\r\n###\r\n\r\nGET http://localhost:8080/authors/stephenKing\r\nConnection: Keep-Alive\r\nUser-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)\r\nAccept-Encoding: br,deflate,gzip,x-gzip\r\n\r\n<> 2024-08-11T211813.200.json\r\n\r\n###\r\n\r\nGET http://localhost:8080/books/978-0451526342\r\nConnection: Keep-Alive\r\nUser-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)\r\nAccept-Encoding: br,deflate,gzip,x-gzip\r\n\r\n<> 2024-08-11T210646.200.json\r\n\r\n###\r\n\r\nGET http://localhost:8080/authors/stephenKing\r\nConnection: Keep-Alive\r\nUser-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)\r\nAccept-Encoding: br,deflate,gzip,x-gzip\r\n\r\n<> 2024-08-11T194554.200.json\r\n\r\n###\r\n\r\nGET http://localhost:8080/authors/stephenKing\r\nConnection: Keep-Alive\r\nUser-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)\r\nAccept-Encoding: br,deflate,gzip,x-gzip\r\n\r\n<> 2024-08-11T194533.200.json\r\n\r\n###\r\n\r\nGET http://localhost:8080/authors/stephenKing\r\nConnection: Keep-Alive\r\nUser-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)\r\nAccept-Encoding: br,deflate,gzip,x-gzip\r\n\r\n<> 2024-08-11T192345.200.json\r\n\r\n###\r\n\r\nGET http://localhost:8080/authors/stephenKing\r\nConnection: Keep-Alive\r\nUser-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)\r\nAccept-Encoding: br,deflate,gzip,x-gzip\r\n\r\n<> 2024-08-11T192152.200.json\r\n\r\n###\r\n\r\nGET http://localhost:8080/authors/stephenKing\r\nConnection: Keep-Alive\r\nUser-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)\r\nAccept-Encoding: br,deflate,gzip,x-gzip\r\n\r\n<> 2024-08-11T191954.404.json\r\n\r\n###\r\n\r\nGET http://localhost:8080/authors/stephenKing\r\nConnection: Keep-Alive\r\nUser-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)\r\nAccept-Encoding: br,deflate,gzip,x-gzip\r\n\r\n<> 2024-08-11T191949.404.json\r\n\r\n###\r\n\r\nGET http://127.0.0.1:8080/authors/stephenKing\r\nConnection: Keep-Alive\r\nUser-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)\r\nAccept-Encoding: br,deflate,gzip,x-gzip\r\n\r\n<> 2024-08-11T191835.404.json\r\n\r\n###\r\n\r\nGET http://localhost:8080/authors/stephenKing\r\nConnection: Keep-Alive\r\nUser-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)\r\nAccept-Encoding: br,deflate,gzip,x-gzip\r\n\r\n<> 2024-08-11T191346.404.json\r\n\r\n###\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/httpRequests/http-requests-log.http b/.idea/httpRequests/http-requests-log.http
+--- a/.idea/httpRequests/http-requests-log.http	(revision fe7a3ba77b7ddac1b5f868a235af9fe529d40bfc)
++++ b/.idea/httpRequests/http-requests-log.http	(date 1724611906053)
+@@ -1,3 +1,217 @@
++GET http://localhost:8080/api/books/available
++Connection: Keep-Alive
++User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
++Accept-Encoding: br,deflate,gzip,x-gzip
++
++<> 2024-08-26T025120.500.json
++
++###
++
++GET http://localhost:8080/api/books/available
++Connection: Keep-Alive
++User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
++Accept-Encoding: br,deflate,gzip,x-gzip
++
++<> 2024-08-26T025028.400.json
++
++###
++
++GET http://localhost:8080/api/books
++Connection: Keep-Alive
++User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
++Accept-Encoding: br,deflate,gzip,x-gzip
++
++<> 2024-08-26T014606.500.json
++
++###
++
++GET http://localhost:8080/api/books
++Connection: Keep-Alive
++User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
++Accept-Encoding: br,deflate,gzip,x-gzip
++
++<> 2024-08-25T234612.500.json
++
++###
++
++GET http://localhost:8080/api/books/2
++Connection: Keep-Alive
++User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
++Accept-Encoding: br,deflate,gzip,x-gzip
++
++<> 2024-08-25T090855.200.json
++
++###
++
++GET http://localhost:8080/api/books/1
++Connection: Keep-Alive
++User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
++Accept-Encoding: br,deflate,gzip,x-gzip
++
++###
++
++GET http://localhost:8080/api/books/5
++Connection: Keep-Alive
++User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
++Accept-Encoding: br,deflate,gzip,x-gzip
++
++<> 2024-08-25T090836.200.json
++
++###
++
++GET http://localhost:8080/api/books/1
++Connection: Keep-Alive
++User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
++Accept-Encoding: br,deflate,gzip,x-gzip
++
++###
++
++GET http://localhost:8080/api/books/1
++Connection: Keep-Alive
++User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
++Accept-Encoding: br,deflate,gzip,x-gzip
++
++<> 2024-08-25T090149.500.json
++
++###
++
++GET http://localhost:8080/api/books
++Connection: Keep-Alive
++User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
++Accept-Encoding: br,deflate,gzip,x-gzip
++
++<> 2024-08-25T084502.200.json
++
++###
++
++GET http://localhost:8080/api/books/1
++Connection: Keep-Alive
++User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
++Accept-Encoding: br,deflate,gzip,x-gzip
++
++###
++
++GET http://localhost:8080/api/books/1
++Connection: Keep-Alive
++User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
++Accept-Encoding: br,deflate,gzip,x-gzip
++
++###
++
++DELETE http://localhost:8080/api/authors/delete/1
++Connection: Keep-Alive
++User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
++Accept-Encoding: br,deflate,gzip,x-gzip
++
++<> 2024-08-25T070535.500.json
++
++###
++
++DELETE http://localhost:8080/api/authors/delete/1
++Connection: Keep-Alive
++User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
++Accept-Encoding: br,deflate,gzip,x-gzip
++
++<> 2024-08-25T070456.500.json
++
++###
++
++PUT http://localhost:8080/api/authors/update/29
++Content-Type: application/x-www-form-urlencoded
++Content-Length: 0
++Connection: Keep-Alive
++User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
++Accept-Encoding: br,deflate,gzip,x-gzip
++
++<> 2024-08-25T063958.404.json
++
++###
++
++POST http://localhost:8080/api/authors/add
++Content-Length: 0
++Connection: Keep-Alive
++User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
++Accept-Encoding: br,deflate,gzip,x-gzip
++
++<> 2024-08-25T061325.405.json
++
++###
++
++POST http://localhost:8080/api/authors/add
++Content-Length: 0
++Connection: Keep-Alive
++User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
++Accept-Encoding: br,deflate,gzip,x-gzip
++
++<> 2024-08-25T061234.405.json
++
++###
++
++POST http://localhost:8080/api/authors
++Content-Type: application/json
++Content-Length: 0
++Connection: Keep-Alive
++User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
++Accept-Encoding: br,deflate,gzip,x-gzip
++
++<> 2024-08-25T045858.405.json
++
++###
++
++GET http://localhost:8080/api/authors/1
++Connection: Keep-Alive
++User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
++Accept-Encoding: br,deflate,gzip,x-gzip
++
++<> 2024-08-25T044301.200.json
++
++###
++
++GET http://localhost:8080/api/authors/1
++Connection: Keep-Alive
++User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
++Accept-Encoding: br,deflate,gzip,x-gzip
++
++<> 2024-08-25T043422.404.json
++
++###
++
++GET http://localhost:8080/api/books
++Connection: Keep-Alive
++User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
++Accept-Encoding: br,deflate,gzip,x-gzip
++
++<> 2024-08-25T034344.200.json
++
++###
++
++GET http://localhost:8080/api/authors
++Connection: Keep-Alive
++User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
++Accept-Encoding: br,deflate,gzip,x-gzip
++
++<> 2024-08-25T034313.200.json
++
++###
++
++GET http://localhost:8080/api/books
++Connection: Keep-Alive
++User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
++Accept-Encoding: br,deflate,gzip,x-gzip
++
++<> 2024-08-25T033859.404.json
++
++###
++
++GET http://localhost:8080/author
++Connection: Keep-Alive
++User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
++Accept-Encoding: br,deflate,gzip,x-gzip
++
++<> 2024-08-25T033753.404.json
++
++###
++
+ GET http://localhost:8080/nonfictionbooks/978-0316010665
+ Connection: Keep-Alive
+ User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"a6bd1399-e0c7-4066-bde5-b3bd064db777\" name=\"Changes\" comment=\"\">\r\n      <change afterPath=\"$PROJECT_DIR$/appAntonioC/src/main/java/br/edu/infnet/controller/BookController.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/appAntonioC/src/main/java/br/edu/infnet/controller/FictionBookController.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/appAntonioC/src/main/java/br/edu/infnet/controller/NonFictionBookController.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/jarRepositories.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/jarRepositories.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/appAntonioC/.gitignore\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/appAntonioC/.gitignore\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/appAntonioC/pom.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/appAntonioC/pom.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/appAntonioC/src/main/java/br/edu/infnet/appAntonioC/AppAntonioCApplication.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/appAntonioC/src/main/java/br/edu/infnet/appAntonioC/AppAntonioCApplication.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/appAntonioC/src/main/java/br/edu/infnet/model/Author.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/appAntonioC/src/main/java/br/edu/infnet/model/Author.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/appAntonioC/src/main/java/br/edu/infnet/model/Book.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/appAntonioC/src/main/java/br/edu/infnet/model/Book.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/appAntonioC/src/main/java/br/edu/infnet/service/LibraryService.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/appAntonioC/src/main/java/br/edu/infnet/service/LibraryService.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"KubernetesApiProvider\">{\r\n  &quot;contexts&quot;: [\r\n    {\r\n      &quot;name&quot;: &quot;docker-desktop&quot;\r\n    }\r\n  ],\r\n  &quot;isMigrated&quot;: true\r\n}</component>\r\n  <component name=\"KubernetesSettings\">\r\n    <option name=\"contextName\" value=\"docker-desktop\" />\r\n  </component>\r\n  <component name=\"MavenImportPreferences\">\r\n    <option name=\"importingSettings\">\r\n      <MavenImportingSettings>\r\n        <option name=\"jdkForImporter\" value=\"temurin-17\" />\r\n        <option name=\"workspaceImportForciblyTurnedOn\" value=\"true\" />\r\n      </MavenImportingSettings>\r\n    </option>\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;customColor&quot;: &quot;&quot;,\r\n  &quot;associatedIndex&quot;: 4\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2kWVQN1leEHhOsz4RM7GYPVR4VB\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"flattenPackages\" value=\"true\" />\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"ASKED_ADD_EXTERNAL_FILES\": \"true\",\r\n    \"HTTP Request.generated-requests | #10.executor\": \"Run\",\r\n    \"HTTP Request.generated-requests | #11.executor\": \"Run\",\r\n    \"HTTP Request.generated-requests | #12.executor\": \"Run\",\r\n    \"HTTP Request.generated-requests | #13.executor\": \"Run\",\r\n    \"HTTP Request.generated-requests | #3.executor\": \"Run\",\r\n    \"HTTP Request.generated-requests | #4.executor\": \"Run\",\r\n    \"HTTP Request.generated-requests | #5.executor\": \"Run\",\r\n    \"HTTP Request.generated-requests | #6.executor\": \"Run\",\r\n    \"HTTP Request.generated-requests | #7.executor\": \"Run\",\r\n    \"HTTP Request.generated-requests | #8.executor\": \"Run\",\r\n    \"RequestMappingsPanelOrder0\": \"0\",\r\n    \"RequestMappingsPanelOrder1\": \"1\",\r\n    \"RequestMappingsPanelWidth0\": \"75\",\r\n    \"RequestMappingsPanelWidth1\": \"75\",\r\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"Spring Boot.AppAntonioCApplication.executor\": \"Run\",\r\n    \"git-widget-placeholder\": \"Sprint1\",\r\n    \"kotlin-language-version-configured\": \"true\",\r\n    \"node.js.detected.package.eslint\": \"true\",\r\n    \"node.js.detected.package.tslint\": \"true\",\r\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\r\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\r\n    \"nodejs_package_manager_path\": \"npm\",\r\n    \"project.structure.last.edited\": \"Project\",\r\n    \"project.structure.proportion\": \"0.0\",\r\n    \"project.structure.side.proportion\": \"0.0\",\r\n    \"settings.editor.selected.configurable\": \"advanced.settings\",\r\n    \"vue.rearranger.settings.migration\": \"true\"\r\n  }\r\n}]]></component>\r\n  <component name=\"RunManager\" selected=\"Spring Boot.AppAntonioCApplication\">\r\n    <configuration name=\"generated-requests | #10\" type=\"HttpClient.HttpRequestRunConfigurationType\" factoryName=\"HTTP Request\" temporary=\"true\" nameIsGenerated=\"true\" path=\"$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http\" index=\"10\" requestIdentifier=\"#10\" runType=\"Run single request\">\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"generated-requests | #11\" type=\"HttpClient.HttpRequestRunConfigurationType\" factoryName=\"HTTP Request\" temporary=\"true\" nameIsGenerated=\"true\" path=\"$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http\" index=\"11\" requestIdentifier=\"#11\" runType=\"Run single request\">\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"generated-requests | #12\" type=\"HttpClient.HttpRequestRunConfigurationType\" factoryName=\"HTTP Request\" temporary=\"true\" nameIsGenerated=\"true\" path=\"$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http\" index=\"12\" requestIdentifier=\"#12\" runType=\"Run single request\">\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"generated-requests | #13\" type=\"HttpClient.HttpRequestRunConfigurationType\" factoryName=\"HTTP Request\" temporary=\"true\" nameIsGenerated=\"true\" path=\"$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http\" index=\"13\" requestIdentifier=\"#13\" runType=\"Run single request\">\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"generated-requests | #8\" type=\"HttpClient.HttpRequestRunConfigurationType\" factoryName=\"HTTP Request\" temporary=\"true\" nameIsGenerated=\"true\" path=\"$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http\" index=\"8\" requestIdentifier=\"#8\" runType=\"Run single request\">\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"AppAntonioCApplication\" type=\"SpringBootApplicationConfigurationType\" factoryName=\"Spring Boot\" nameIsGenerated=\"true\">\r\n      <module name=\"appAntonioC\" />\r\n      <option name=\"SPRING_BOOT_MAIN_CLASS\" value=\"br.edu.infnet.appAntonioC.AppAntonioCApplication\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"HTTP Request.generated-requests | #13\" />\r\n        <item itemvalue=\"HTTP Request.generated-requests | #12\" />\r\n        <item itemvalue=\"HTTP Request.generated-requests | #11\" />\r\n        <item itemvalue=\"HTTP Request.generated-requests | #10\" />\r\n        <item itemvalue=\"HTTP Request.generated-requests | #8\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"jdk-17.0.10-corretto-17.0.10-4caba194b151-5cd809f4\" />\r\n        <option value=\"jdk-18.0.2-corretto-18.0.2-4caba194b151-5720f15e\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"a6bd1399-e0c7-4066-bde5-b3bd064db777\" name=\"Changes\" comment=\"\" />\r\n      <created>1723399306686</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1723399306686</updated>\r\n      <workItem from=\"1723399312530\" duration=\"361000\" />\r\n      <workItem from=\"1723414280874\" duration=\"3602000\" />\r\n      <workItem from=\"1723418298564\" duration=\"2312000\" />\r\n    </task>\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision fe7a3ba77b7ddac1b5f868a235af9fe529d40bfc)
++++ b/.idea/workspace.xml	(date 1724621643304)
+@@ -5,17 +5,25 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="a6bd1399-e0c7-4066-bde5-b3bd064db777" name="Changes" comment="">
+-      <change afterPath="$PROJECT_DIR$/appAntonioC/src/main/java/br/edu/infnet/controller/BookController.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/appAntonioC/src/main/java/br/edu/infnet/controller/FictionBookController.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/appAntonioC/src/main/java/br/edu/infnet/controller/NonFictionBookController.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/appAntonioC/src/main/java/br/edu/infnet/appAntonioC/service/AuthorService.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/jpa-buddy.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/appAntonioC/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/appAntonioC/.gitignore" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/appAntonioC/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/appAntonioC/pom.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/appAntonioC/src/main/java/br/edu/infnet/appAntonioC/AppAntonioCApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/appAntonioC/src/main/java/br/edu/infnet/appAntonioC/AppAntonioCApplication.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/appAntonioC/src/main/java/br/edu/infnet/model/Author.java" beforeDir="false" afterPath="$PROJECT_DIR$/appAntonioC/src/main/java/br/edu/infnet/model/Author.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/appAntonioC/src/main/java/br/edu/infnet/model/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/appAntonioC/src/main/java/br/edu/infnet/model/Book.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/appAntonioC/src/main/java/br/edu/infnet/service/LibraryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/appAntonioC/src/main/java/br/edu/infnet/service/LibraryService.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/appAntonioC/src/main/java/br/edu/infnet/controller/AuthorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/appAntonioC/src/main/java/br/edu/infnet/appAntonioC/controller/AuthorController.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/appAntonioC/src/main/java/br/edu/infnet/controller/BookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/appAntonioC/src/main/java/br/edu/infnet/appAntonioC/controller/BookController.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/appAntonioC/src/main/java/br/edu/infnet/controller/FictionBookController.java" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/appAntonioC/src/main/java/br/edu/infnet/controller/NonFictionBookController.java" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/appAntonioC/src/main/java/br/edu/infnet/model/Author.java" beforeDir="false" afterPath="$PROJECT_DIR$/appAntonioC/src/main/java/br/edu/infnet/appAntonioC/model/Author.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/appAntonioC/src/main/java/br/edu/infnet/model/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/appAntonioC/src/main/java/br/edu/infnet/appAntonioC/model/Book.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/appAntonioC/src/main/java/br/edu/infnet/model/FictionBook.java" beforeDir="false" afterPath="$PROJECT_DIR$/appAntonioC/src/main/java/br/edu/infnet/appAntonioC/model/FictionBook.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/appAntonioC/src/main/java/br/edu/infnet/model/NonFictionBook.java" beforeDir="false" afterPath="$PROJECT_DIR$/appAntonioC/src/main/java/br/edu/infnet/appAntonioC/model/NonFictionBook.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/appAntonioC/src/main/java/br/edu/infnet/service/LibraryService.java" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/appAntonioC/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/appAntonioC/src/main/resources/application.properties" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -31,6 +39,9 @@
+   </component>
+   <component name="Git.Settings">
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
++  </component>
++  <component name="JpbToolWindowState">
++    <option name="isToolWindowVisible" value="false" />
+   </component>
+   <component name="KubernetesApiProvider">{
+   &quot;contexts&quot;: [
+@@ -56,59 +67,95 @@
+   &quot;associatedIndex&quot;: 4
+ }</component>
+   <component name="ProjectId" id="2kWVQN1leEHhOsz4RM7GYPVR4VB" />
++  <component name="ProjectLevelVcsManager">
++    <ConfirmationsSetting value="1" id="Add" />
++  </component>
+   <component name="ProjectViewState">
+     <option name="flattenPackages" value="true" />
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent"><![CDATA[{
+-  "keyToString": {
+-    "ASKED_ADD_EXTERNAL_FILES": "true",
+-    "HTTP Request.generated-requests | #10.executor": "Run",
+-    "HTTP Request.generated-requests | #11.executor": "Run",
+-    "HTTP Request.generated-requests | #12.executor": "Run",
+-    "HTTP Request.generated-requests | #13.executor": "Run",
+-    "HTTP Request.generated-requests | #3.executor": "Run",
+-    "HTTP Request.generated-requests | #4.executor": "Run",
+-    "HTTP Request.generated-requests | #5.executor": "Run",
+-    "HTTP Request.generated-requests | #6.executor": "Run",
+-    "HTTP Request.generated-requests | #7.executor": "Run",
+-    "HTTP Request.generated-requests | #8.executor": "Run",
+-    "RequestMappingsPanelOrder0": "0",
+-    "RequestMappingsPanelOrder1": "1",
+-    "RequestMappingsPanelWidth0": "75",
+-    "RequestMappingsPanelWidth1": "75",
+-    "RunOnceActivity.OpenProjectViewOnStart": "true",
+-    "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "Spring Boot.AppAntonioCApplication.executor": "Run",
+-    "git-widget-placeholder": "Sprint1",
+-    "kotlin-language-version-configured": "true",
+-    "node.js.detected.package.eslint": "true",
+-    "node.js.detected.package.tslint": "true",
+-    "node.js.selected.package.eslint": "(autodetect)",
+-    "node.js.selected.package.tslint": "(autodetect)",
+-    "nodejs_package_manager_path": "npm",
+-    "project.structure.last.edited": "Project",
+-    "project.structure.proportion": "0.0",
+-    "project.structure.side.proportion": "0.0",
+-    "settings.editor.selected.configurable": "advanced.settings",
+-    "vue.rearranger.settings.migration": "true"
+-  }
+-}]]></component>
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
++    &quot;HTTP Request.generated-requests | #10.executor&quot;: &quot;Run&quot;,
++    &quot;HTTP Request.generated-requests | #11.executor&quot;: &quot;Run&quot;,
++    &quot;HTTP Request.generated-requests | #12.executor&quot;: &quot;Run&quot;,
++    &quot;HTTP Request.generated-requests | #13.executor&quot;: &quot;Run&quot;,
++    &quot;HTTP Request.generated-requests | #27.executor&quot;: &quot;Run&quot;,
++    &quot;HTTP Request.generated-requests | #3.executor&quot;: &quot;Run&quot;,
++    &quot;HTTP Request.generated-requests | #30.executor&quot;: &quot;Run&quot;,
++    &quot;HTTP Request.generated-requests | #31.executor&quot;: &quot;Run&quot;,
++    &quot;HTTP Request.generated-requests | #32.executor&quot;: &quot;Run&quot;,
++    &quot;HTTP Request.generated-requests | #34.executor&quot;: &quot;Run&quot;,
++    &quot;HTTP Request.generated-requests | #35.executor&quot;: &quot;Run&quot;,
++    &quot;HTTP Request.generated-requests | #37.executor&quot;: &quot;Run&quot;,
++    &quot;HTTP Request.generated-requests | #4.executor&quot;: &quot;Run&quot;,
++    &quot;HTTP Request.generated-requests | #40.executor&quot;: &quot;Run&quot;,
++    &quot;HTTP Request.generated-requests | #42.executor&quot;: &quot;Run&quot;,
++    &quot;HTTP Request.generated-requests | #43.executor&quot;: &quot;Run&quot;,
++    &quot;HTTP Request.generated-requests | #44.executor&quot;: &quot;Run&quot;,
++    &quot;HTTP Request.generated-requests | #45.executor&quot;: &quot;Run&quot;,
++    &quot;HTTP Request.generated-requests | #46.executor&quot;: &quot;Run&quot;,
++    &quot;HTTP Request.generated-requests | #47.executor&quot;: &quot;Run&quot;,
++    &quot;HTTP Request.generated-requests | #48.executor&quot;: &quot;Run&quot;,
++    &quot;HTTP Request.generated-requests | #5.executor&quot;: &quot;Run&quot;,
++    &quot;HTTP Request.generated-requests | #53.executor&quot;: &quot;Run&quot;,
++    &quot;HTTP Request.generated-requests | #54.executor&quot;: &quot;Run&quot;,
++    &quot;HTTP Request.generated-requests | #6.executor&quot;: &quot;Run&quot;,
++    &quot;HTTP Request.generated-requests | #7.executor&quot;: &quot;Run&quot;,
++    &quot;HTTP Request.generated-requests | #8.executor&quot;: &quot;Run&quot;,
++    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
++    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
++    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
++    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
++    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
++    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
++    &quot;Spring Boot.AppAntonioCApplication.executor&quot;: &quot;Run&quot;,
++    &quot;git-widget-placeholder&quot;: &quot;Sprint2&quot;,
++    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
++    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
++    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
++    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
++    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
++    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
++    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
++    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
++    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
++    &quot;settings.editor.selected.configurable&quot;: &quot;advanced.settings&quot;,
++    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
++  },
++  &quot;keyToStringList&quot;: {
++    &quot;DatabaseDriversLRU&quot;: [
++      &quot;postgresql&quot;
++    ]
++  }
++}</component>
++  <component name="RecentsManager">
++    <key name="MoveFile.RECENT_KEYS">
++      <recent name="D:\VSCodeWork\AntonioAlmeidaLibrary\appAntonioC\target\test-classes\br\edu\infnet\appAntonioC\service" />
++      <recent name="D:\VSCodeWork\AntonioAlmeidaLibrary\appAntonioC\target\test-classes\br\edu\infnet\appAntonioC\repository" />
++      <recent name="D:\VSCodeWork\AntonioAlmeidaLibrary\appAntonioC\target\test-classes\br\edu\infnet\appAntonioC\controller" />
++    </key>
++    <key name="CopyClassDialog.RECENTS_KEY">
++      <recent name="br.edu.infnet.appAntonioC.service" />
++    </key>
++  </component>
+   <component name="RunManager" selected="Spring Boot.AppAntonioCApplication">
+-    <configuration name="generated-requests | #10" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="10" requestIdentifier="#10" runType="Run single request">
++    <configuration name="generated-requests | #45" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="45" requestIdentifier="#45" runType="Run single request">
+       <method v="2" />
+     </configuration>
+-    <configuration name="generated-requests | #11" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="11" requestIdentifier="#11" runType="Run single request">
++    <configuration name="generated-requests | #47" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="47" requestIdentifier="#47" runType="Run single request">
+       <method v="2" />
+     </configuration>
+-    <configuration name="generated-requests | #12" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="12" requestIdentifier="#12" runType="Run single request">
++    <configuration name="generated-requests | #48" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="48" requestIdentifier="#48" runType="Run single request">
+       <method v="2" />
+     </configuration>
+-    <configuration name="generated-requests | #13" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="13" requestIdentifier="#13" runType="Run single request">
++    <configuration name="generated-requests | #53" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="53" requestIdentifier="#53" runType="Run single request">
+       <method v="2" />
+     </configuration>
+-    <configuration name="generated-requests | #8" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="8" requestIdentifier="#8" runType="Run single request">
++    <configuration name="generated-requests | #54" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="54" requestIdentifier="#54" runType="Run single request">
+       <method v="2" />
+     </configuration>
+     <configuration name="AppAntonioCApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+@@ -120,11 +167,11 @@
+     </configuration>
+     <recent_temporary>
+       <list>
+-        <item itemvalue="HTTP Request.generated-requests | #13" />
+-        <item itemvalue="HTTP Request.generated-requests | #12" />
+-        <item itemvalue="HTTP Request.generated-requests | #11" />
+-        <item itemvalue="HTTP Request.generated-requests | #10" />
+-        <item itemvalue="HTTP Request.generated-requests | #8" />
++        <item itemvalue="HTTP Request.generated-requests | #54" />
++        <item itemvalue="HTTP Request.generated-requests | #53" />
++        <item itemvalue="HTTP Request.generated-requests | #45" />
++        <item itemvalue="HTTP Request.generated-requests | #48" />
++        <item itemvalue="HTTP Request.generated-requests | #47" />
+       </list>
+     </recent_temporary>
+   </component>
+@@ -147,10 +194,49 @@
+       <workItem from="1723399312530" duration="361000" />
+       <workItem from="1723414280874" duration="3602000" />
+       <workItem from="1723418298564" duration="2312000" />
++      <workItem from="1724510857230" duration="53206000" />
++      <workItem from="1724611358594" duration="4127000" />
++      <workItem from="1724620569178" duration="1071000" />
+     </task>
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+     <option name="version" value="3" />
+   </component>
++  <component name="Vcs.Log.Tabs.Properties">
++    <option name="OPEN_GENERIC_TABS">
++      <map>
++        <entry key="7a9478a0-df8b-4b4f-ba97-3a9253767a84" value="TOOL_WINDOW" />
++      </map>
++    </option>
++    <option name="TAB_STATES">
++      <map>
++        <entry key="7a9478a0-df8b-4b4f-ba97-3a9253767a84">
++          <value>
++            <State>
++              <option name="FILTERS">
++                <map>
++                  <entry key="branch">
++                    <value>
++                      <list>
++                        <option value="HEAD" />
++                      </list>
++                    </value>
++                  </entry>
++                  <entry key="structure">
++                    <value>
++                      <list>
++                        <option value="dir:D:/VSCodeWork/AntonioAlmeidaLibrary/appAntonioC/src" />
++                      </list>
++                    </value>
++                  </entry>
++                </map>
++              </option>
++              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
++            </State>
++          </value>
++        </entry>
++      </map>
++    </option>
++  </component>
+ </project>
+\ No newline at end of file
+Index: appAntonioC/src/main/java/br/edu/infnet/controller/AuthorController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/appAntonioC/src/main/java/br/edu/infnet/controller/AuthorController.java b/appAntonioC/src/main/java/br/edu/infnet/appAntonioC/controller/AuthorController.java
+rename from appAntonioC/src/main/java/br/edu/infnet/controller/AuthorController.java
+rename to appAntonioC/src/main/java/br/edu/infnet/appAntonioC/controller/AuthorController.java
+--- a/appAntonioC/src/main/java/br/edu/infnet/controller/AuthorController.java	(revision fe7a3ba77b7ddac1b5f868a235af9fe529d40bfc)
++++ b/appAntonioC/src/main/java/br/edu/infnet/appAntonioC/controller/AuthorController.java	(date 1724545875959)
+@@ -1,28 +1,57 @@
+-package br.edu.infnet.controller;
++package br.edu.infnet.appAntonioC.controller;
+ 
+-import br.edu.infnet.model.Author;
+-import br.edu.infnet.service.LibraryService;
+-import org.springframework.web.bind.annotation.GetMapping;
+-import org.springframework.web.bind.annotation.RequestMapping;
+-import org.springframework.web.bind.annotation.RestController;
++import br.edu.infnet.appAntonioC.model.Author;
++import br.edu.infnet.appAntonioC.service.AuthorService;
++import org.springframework.beans.factory.annotation.Autowired;
++import org.springframework.http.ResponseEntity;
++import org.springframework.web.bind.annotation.*;
+ 
+ import java.util.List;
+-import java.util.stream.Collectors;
++import java.util.Optional;
+ 
+ @RestController
+-@RequestMapping("/authors")
++@RequestMapping("/api/authors")
+ public class AuthorController {
+ 
+-    private final LibraryService libraryService;
++    private final AuthorService authorService;
++
++    @Autowired
++    public AuthorController(AuthorService authorService) {
++        this.authorService = authorService;
++    }
++
++    @GetMapping
++    public ResponseEntity<List<Author>> getAllAuthors() {
++        List<Author> authors = authorService.getAllAuthors();
++        return ResponseEntity.ok(authors);
++    }
++
++    @GetMapping("/{id}")
++    public ResponseEntity<Author> getAuthorById(@PathVariable Long id) {
++        Optional<Author> author = authorService.getAuthorById(id);
++        return author.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
++    }
++
++    @PostMapping("/add")
++    public ResponseEntity<String> addAuthor(@RequestParam String name,
++                                            @RequestParam String email,
++                                            @RequestParam String nationality) {
++        authorService.addAuthor(name, email, nationality);
++    return ResponseEntity.ok("Author added successfully ");
++    }
+ 
+-    public AuthorController(LibraryService libraryService) {
+-        this.libraryService = libraryService;
++    @PutMapping("/update/{id}")
++    public ResponseEntity<String> updateAuthor(@PathVariable Long id,
++                                               @RequestParam String name,
++                                               @RequestParam String email,
++                                               @RequestParam String nationality) {
++        authorService.updateAuthor(id, name, email, nationality);
++        return ResponseEntity.ok("Author updated successfully");
+     }
+ 
+-    @GetMapping("/stephenKing")
+-    public List<Author> getStephenKing() {
+-        return libraryService.getAuthors().stream()
+-                .filter(author -> "Stephen King".equals(author.getName()))
+-                .collect(Collectors.toList());
++    @DeleteMapping("/delete/{id}")
++    public ResponseEntity<String> deleteAuthor(@PathVariable Long id) {
++        authorService.deleteAuthor(id);
++        return ResponseEntity.ok("Author deleted successfully");
+     }
+ }
+Index: appAntonioC/src/main/java/br/edu/infnet/controller/BookController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/appAntonioC/src/main/java/br/edu/infnet/controller/BookController.java b/appAntonioC/src/main/java/br/edu/infnet/appAntonioC/controller/BookController.java
+rename from appAntonioC/src/main/java/br/edu/infnet/controller/BookController.java
+rename to appAntonioC/src/main/java/br/edu/infnet/appAntonioC/controller/BookController.java
+--- a/appAntonioC/src/main/java/br/edu/infnet/controller/BookController.java	(revision fe7a3ba77b7ddac1b5f868a235af9fe529d40bfc)
++++ b/appAntonioC/src/main/java/br/edu/infnet/appAntonioC/controller/BookController.java	(date 1724611827671)
+@@ -1,26 +1,78 @@
+-package br.edu.infnet.controller;
++package br.edu.infnet.appAntonioC.controller;
+ 
+-import br.edu.infnet.model.Book;
+-import br.edu.infnet.service.LibraryService;
++import br.edu.infnet.appAntonioC.model.Book;
++import br.edu.infnet.appAntonioC.service.AuthorService;
++import br.edu.infnet.appAntonioC.service.BookService;
++import jakarta.persistence.EntityNotFoundException;
+ import org.springframework.beans.factory.annotation.Autowired;
+-import org.springframework.web.bind.annotation.GetMapping;
+-import org.springframework.web.bind.annotation.PathVariable;
+-import org.springframework.web.bind.annotation.RequestMapping;
+-import org.springframework.web.bind.annotation.RestController;
++import org.springframework.http.HttpStatus;
++import org.springframework.http.ResponseEntity;
++import org.springframework.web.bind.annotation.*;
+ 
++import java.util.List;
+ import java.util.Optional;
+ 
+ @RestController
+-@RequestMapping("/books")
++@RequestMapping("/api/books")
+ public class BookController {
+ 
++    private final BookService bookService;
++
+     @Autowired
+-    private LibraryService libraryService;
++    public BookController(BookService  bookService) {
++        this.bookService = bookService;
++    }
++
++    @GetMapping("/available")
++    public List<Book> getAllAvailableBooks() {
++        return bookService.getAllAvailableBooks();
++    }
++
++    @GetMapping("/{id}")
++    public ResponseEntity<Book> getBookById(@PathVariable Long id) {
++        try {
++            Book book = bookService.getBookById(id);
++            return ResponseEntity.ok(book);
++        } catch (EntityNotFoundException e) {
++            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
++        }
++    }
++
++    @PostMapping("/add")
++    public ResponseEntity<String> addBook(@RequestParam String type,
++                                          @RequestParam String isbn,
++                                          @RequestParam String title,
++                                          @RequestParam Float price,
++                                          @RequestParam Boolean available,
++                                          @RequestParam Long authorId,
++                                          @RequestParam(required = false) String genre,
++                                          @RequestParam(required = false) Boolean isSeries,
++                                          @RequestParam(required = false) String subject,
++                                          @RequestParam(required = false) Integer referenceNumber) {
++        try {
++            bookService.addBook(type, title, isbn, price, available, authorId, genre, isSeries, subject, referenceNumber);
++            return ResponseEntity.ok("Book added successfully");
++        } catch (IllegalArgumentException e) {
++            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
++        }
++    }
++
+ 
+-    @GetMapping("/{isbn}")
+-    public Optional<Book> getBookByIsbn(@PathVariable String isbn) {
+-        return libraryService.getBooks().stream()
+-                .filter(book -> isbn.equals(book.getIsbn()))
+-                .findFirst();
++    @PutMapping("/{id}")
++    public ResponseEntity<String> updateBook(@PathVariable Long id,
++                                             @RequestParam String title,
++                                             @RequestParam String isbn,
++                                             @RequestParam Float price,
++                                             @RequestParam Boolean available) {
++        try {
++            bookService.updateBook(id, title, isbn, price, available);
++            return ResponseEntity.ok("Book updated successfully");
++        } catch (EntityNotFoundException e) {
++            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Book not found");
++        }
+     }
++
++/*
++there is no method of deleting a book, as when deleting an Author their corresponding books are deleted.
++ */
+ }
+Index: .idea/modules.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ProjectModuleManager\">\r\n    <modules>\r\n      <module fileurl=\"file://$PROJECT_DIR$/.idea/AntonioAlmeidaLibrary.iml\" filepath=\"$PROJECT_DIR$/.idea/AntonioAlmeidaLibrary.iml\" />\r\n    </modules>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/modules.xml b/.idea/modules.xml
+--- a/.idea/modules.xml	(revision fe7a3ba77b7ddac1b5f868a235af9fe529d40bfc)
++++ b/.idea/modules.xml	(date 1724534272368)
+@@ -3,6 +3,7 @@
+   <component name="ProjectModuleManager">
+     <modules>
+       <module fileurl="file://$PROJECT_DIR$/.idea/AntonioAlmeidaLibrary.iml" filepath="$PROJECT_DIR$/.idea/AntonioAlmeidaLibrary.iml" />
++      <module fileurl="file://$PROJECT_DIR$/appAntonioC/appAntonioC.iml" filepath="$PROJECT_DIR$/appAntonioC/appAntonioC.iml" />
+     </modules>
+   </component>
+ </project>
+\ No newline at end of file

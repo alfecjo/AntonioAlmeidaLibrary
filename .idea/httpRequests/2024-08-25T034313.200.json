@@ -1,0 +1,130 @@
+[
+  {
+    "id": 1,
+    "name": "J.K. Rowling",
+    "email": "jk.rowling@example.com",
+    "nationality": "British",
+    "books": [
+      {
+        "isbn": "978-0747532699",
+        "title": "Harry Potter and the Sorcerer's Stone",
+        "price": 39.99,
+        "available": true,
+        "genre": "Fantasy",
+        "series": true
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Yuval Noah Harari",
+    "email": "harari@example.com",
+    "nationality": "Israeli",
+    "books": [
+      {
+        "isbn": "978-0099590088",
+        "title": "Sapiens: A Brief History of Humankind",
+        "price": 25.99,
+        "available": true,
+        "subject": "History",
+        "referenceNumber": 10
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "George Orwell",
+    "email": "george.orwell@example.com",
+    "nationality": "British",
+    "books": [
+      {
+        "isbn": "978-0451526342",
+        "title": "Animal Farm",
+        "price": 12.99,
+        "available": true,
+        "genre": "Political Satire",
+        "series": false
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Malcolm Gladwell",
+    "email": "malcolm.gladwell@example.com",
+    "nationality": "Canadian",
+    "books": [
+      {
+        "isbn": "978-0316010665",
+        "title": "Blink: The Power of Thinking Without Thinking",
+        "price": 21.99,
+        "available": true,
+        "subject": "Psychology",
+        "referenceNumber": 5
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Agatha Christie",
+    "email": "agatha.christie@example.com",
+    "nationality": "British",
+    "books": [
+      {
+        "isbn": "978-0062693662",
+        "title": "Murder on the Orient Express",
+        "price": 15.99,
+        "available": true,
+        "genre": "Mystery",
+        "series": false
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Stephen King",
+    "email": "stephen.king@example.com",
+    "nationality": "American",
+    "books": [
+      {
+        "isbn": "978-1501142970",
+        "title": "It",
+        "price": 19.99,
+        "available": true,
+        "genre": "Horror",
+        "series": true
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Michel Foucault",
+    "email": "michel.foucault@example.com",
+    "nationality": "French",
+    "books": [
+      {
+        "isbn": "978-0375405820",
+        "title": "Discipline and Punish",
+        "price": 29.99,
+        "available": true,
+        "subject": "Philosophy",
+        "referenceNumber": 12
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Neil Gaiman",
+    "email": "neil.gaiman@example.com",
+    "nationality": "British",
+    "books": [
+      {
+        "isbn": "978-0062572235",
+        "title": "American Gods",
+        "price": 18.99,
+        "available": true,
+        "genre": "Fantasy",
+        "series": true
+      }
+    ]
+  }
+]

@@ -1,0 +1,9 @@
+{
+  "type": "fiction",
+  "isbn": "978-0062693662",
+  "title": "Murder on the Orient Express",
+  "price": 15.99,
+  "available": true,
+  "genre": "Mystery",
+  "series": false
+}

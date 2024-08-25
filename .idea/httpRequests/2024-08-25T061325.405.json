@@ -1,0 +1,6 @@
+{
+  "timestamp": "2024-08-24T22:13:25.711+00:00",
+  "status": 405,
+  "error": "Method Not Allowed",
+  "path": "/api/authors/add"
+}

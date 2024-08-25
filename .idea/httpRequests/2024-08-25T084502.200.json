@@ -1,0 +1,56 @@
+[
+  {
+    "type": "fiction",
+    "isbn": "978-0451526342",
+    "title": "Animal Farm",
+    "price": 12.99,
+    "available": true,
+    "genre": "Political Satire",
+    "series": false
+  },
+  {
+    "type": "nonfiction",
+    "isbn": "978-0316010665",
+    "title": "Blink: The Power of Thinking Without Thinking",
+    "price": 21.99,
+    "available": true,
+    "subject": "Psychology",
+    "referenceNumber": 5
+  },
+  {
+    "type": "fiction",
+    "isbn": "978-0062693662",
+    "title": "Murder on the Orient Express",
+    "price": 15.99,
+    "available": true,
+    "genre": "Mystery",
+    "series": false
+  },
+  {
+    "type": "fiction",
+    "isbn": "978-1501142970",
+    "title": "It",
+    "price": 19.99,
+    "available": true,
+    "genre": "Horror",
+    "series": true
+  },
+  {
+    "type": "nonfiction",
+    "isbn": "978-0375405820",
+    "title": "Discipline and Punish",
+    "price": 29.99,
+    "available": true,
+    "subject": "Philosophy",
+    "referenceNumber": 12
+  },
+  {
+    "type": "fiction",
+    "isbn": "978-0062572235",
+    "title": "American Gods",
+    "price": 18.99,
+    "available": true,
+    "genre": "Fantasy",
+    "series": true
+  }
+]

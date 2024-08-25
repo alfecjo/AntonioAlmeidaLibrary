@@ -1,26 +1,51 @@
-package br.edu.infnet.model;
+package br.edu.infnet.appAntonioC.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-
+import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Author {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String name;
     private String email;
     private String nationality;
 
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JsonManagedReference
-    private List<Book> books;
+    private List<Book> books = new ArrayList<>();
+
+    public Author() {}
 
     public Author(String name, String email, String nationality) {
         this.name = name;
         this.email = email;
         this.nationality = nationality;
-        this.books = new ArrayList<>();
+    }
+
+    public void addBook(Book book) {
+        books.add(book);
+        book.setAuthor(this);
+    }
+
+    public void removeBook(Book book) {
+        books.remove(book);
+        book.setAuthor(null);
     }
 
     // Getters e setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -50,17 +75,7 @@ public class Author {
         return books;
     }
 
-    public void addBook(Book book) {
-        books.add(book);
-    }
-
-    @Override
-    public String toString() {
-        return "Author{" +
-                "name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", nationality='" + nationality + '\'' +
-                ", books=" + books +
-                '}';
+    public void setBooks(List<Book> books) {
+        this.books = books;
     }
 }
